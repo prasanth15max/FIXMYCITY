@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Officer Dashboard - Namma Tamil Nadu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="officer.css">
+</head>
+<body class="out">
+
+<div class="topbar">
+  <div class="gov">
+    <img src="assets/tnmap.png" alt="Tamil Nadu map" class="gov-image"
+         onerror="this.onerror=null;this.src='assets/chennai-tamil-nadu.jpg'">
+    <div class="gov-text">
+      <b lang="ta">தமிழ்நாடு அரசு</b>
+      <small>Government of Tamil Nadu</small>
+    </div>
+  </div>
+  <div class="center-title">
+    <h1>Officer Dashboard</h1>
+    <p>Corporation Complaint Management</p>
+  </div>
+  <div class="cm">
+    <div class="cm-text">
+      <small>Authorised staff only</small>
+      <b>Solve the problem<br>for the public</b>
+    </div>
+  </div>
+</div>
+
+<!-- OFFICER LOGIN -->
+<main id="oLogin" class="o-login">
+  <form class="card" id="oForm">
+    <h3>Officer Login</h3>
+    <label for="oId">Officer ID</label>
+    <input id="oId" autocomplete="username" required>
+    <label for="oPass">Password</label>
+    <input id="oPass" type="password" autocomplete="current-password" required>
+    <button class="btn" type="submit" style="width:100%">Login</button>
+    <p class="msg" id="oMsg" role="status"></p>
+    <div class="o-hint">
+      <b>Demo accounts</b><br>
+      officer1 / tn@2026<br>
+      officer2 / tn@2026<br>
+      admin / admin@2026
+    </div>
+    <p class="o-back"><a href="index.html">&larr; Back to public website</a></p>
+  </form>
+</main>
+
+<!-- OFFICER DASHBOARD -->
+<main id="oDash" class="o-wrap" hidden>
+  <div class="o-bar">
+    <div>
+      <h2>Welcome, <span id="oName"></span></h2>
+      <p class="o-sub" id="oDept"></p>
+    </div>
+    <div class="o-actions">
+      <button class="btn small" id="bRefresh" type="button">Refresh</button>
+      <button class="btn small" id="bExport" type="button">Export CSV</button>
+      <a class="btn small" href="index.html">Public site</a>
+      <button class="btn small out" id="bLogout" type="button">Logout</button>
+    </div>
+  </div>
+
+  <div class="o-stats" id="oStats"></div>
+
+  <div class="o-filters">
+    <input id="fSearch" placeholder="Search ID, name, area...">
+    <select id="fStatus"></select>
+    <select id="fCity"></select>
+    <select id="fType"></select>
+    <select id="fPrio">
+      <option value="">All priority</option>
+      <option>Emergency</option><option>High</option><option>Medium</option><option>Low</option>
+    </select>
+  </div>
+
+  <p class="o-count" id="oCount"></p>
+  <div class="o-list" id="oList"></div>
+</main>
+
+<!-- COMPLAINT DETAIL -->
+<div class="o-modal" id="oModal" hidden>
+  <div class="o-panel card" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <button class="o-x" id="mClose" type="button" aria-label="Close">&times;</button>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-message">
+    <h2>தமிழ் வாழ்க! தமிழ்நாடு வாழ்க!</h2>
+    <p>Every complaint solved is a citizen served.</p>
+    <p>© 2026 Namma Tamil Nadu | Demo project, not an official government site</p>
+  </div>
+</footer>
+
+<div id="toast" role="status"></div>
+<script src="db.js"></script>
+<script src="officer.js"></script>
+</body>
+</html>
