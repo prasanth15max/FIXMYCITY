@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Namma Tamil Nadu - Corporation Complaint Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="out">
+<div class="topbar">
+  <div class="gov">
+    <img src="assets/tnmap.png" alt="Tamil Nadu map" class="gov-image"
+         onerror="this.onerror=null;this.src='assets/chennai-tamil-nadu.jpg'">
+    <div class="gov-text">
+      <b lang="ta">தமிழ்நாடு அரசு</b>
+      <small>Government of Tamil Nadu</small>
+    </div>
+  </div>
+
+  <div class="center-title">
+    <h1>Citizen Service Portal</h1>
+    <p>For a Better Tamil Nadu</p>
+  </div>
+
+  <div class="cm">
+    <div class="cm-text">
+      <small>Hon'ble Chief Minister</small>
+      <b>of <br>Tamil Nadu</b>
+    </div>
+    <img src="assets/Chief%20MInister.jpg" alt="Hon'ble Chief Minister of Tamil Nadu" onerror="this.remove()">
+  </div>
+</div>
+
+<nav id="nav" aria-label="Main">
+  <a class="brand" href="#" onclick="go('home');return false"><svg class="emb"><use href="#emblem"/></svg>Namma Tamil Nadu</a>
+  <div class="links">
+    <button data-go="home" onclick="go('home')">Home</button>
+    <button data-go="complaint" onclick="go('complaint')">Complaint</button>
+    <button data-go="track" onclick="go('track')">Track</button>
+    <button class="out-btn" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<main id="loginView" class="view login on">
+  <div class="art">
+    <div class="slides"></div>
+    <div class="art-in">
+      <h1>Namma Tamil Nadu</h1>
+      <p class="rot" id="rot1"></p>
+      <p class="lead">Before the city wakes up, our corporation workers are already sweeping roads, clearing drains and lifting waste. This portal lets every citizen stand with them.</p>
+      <div class="mini">
+        <div><b data-n="9">0</b><span>Problem types</span></div>
+        <div><b data-n="20">0</b><span>Cities</span></div>
+        <div><b>24x7</b><span>Online</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="auth">
+    <div class="card auth-box">
+      <div class="tabs">
+        <button id="tLogin" class="on" onclick="tab('login')">Login</button>
+        <button id="tReg" onclick="tab('register')">Register</button>
+      </div>
+      <form id="fLogin" onsubmit="login(event)">
+        <h3>Welcome back</h3>
+        <label for="loginEmail">Email</label><input type="email" id="loginEmail" autocomplete="email" required>
+        <label for="loginPassword">Password</label><input type="password" id="loginPassword" autocomplete="current-password" required>
+        <button class="btn" type="submit">Login</button>
+      </form>
+      <form id="fReg" onsubmit="register(event)" hidden>
+        <h3>Create your account</h3>
+        <label for="name">Name</label><input type="text" id="name" autocomplete="name" required>
+        <label for="email">Email</label><input type="email" id="email" autocomplete="email" required>
+        <label for="password">Password (6+ characters)</label><input type="password" id="password" autocomplete="new-password" minlength="6" required>
+        <button class="btn" type="submit">Register</button>
+      </form>
+      <p class="msg" id="authMsg" role="status"></p>
+    </div>
+  </div>
+</main>
+
+<main id="homeView" class="view">
+  <header class="hero">
+    <div class="slides"></div>
+    <div class="hero-in">
+      <p class="chip">Welcome, <span id="who"></span></p>
+      <h1>Report the problem in your area.<br>We keep the city clean.</h1>
+      <p class="rot" id="rot2"></p>
+      <a href="#" class="btn" onclick="go('complaint');return false">Report a Problem</a>
+      <a href="#" class="btn ghost" onclick="go('track');return false">Track Complaint</a>
+    </div>
+  </header>
+  <div class="marquee" aria-hidden="true"><div id="marq"></div></div>
+  <section class="sec">
+    <h2 class="title">What can you report?</h2>
+    <p class="sub">Choose a problem type and tell your Corporation. Add a photo, a video or a letter.</p>
+    <div class="problems" id="problems"></div>
+  </section>
+
+  <section class="sec workers">
+    <h2 class="title">See the work that needs your attention</h2>
+    <p class="sub">These pictures show common public-service issues and repair work. If you notice a similar problem in your street, select the matching category and submit a complaint.</p>
+    <div class="gallery issue-gallery">
+      <figure class="ph"><img src="assets/road-repair.jpg" alt="Road repair work"><figcaption>Road damage and pothole repair</figcaption></figure>
+      <figure class="ph"><img src="assets/drainage-repair.jpg" alt="Drainage repair work"><figcaption>Blocked drainage and sewage issues</figcaption></figure>
+      <figure class="ph"><img src="assets/garbage-cleaning.jpg" alt="Garbage cleaning work"><figcaption>Garbage overflow and waste collection</figcaption></figure>
+      <figure class="ph"><img src="assets/streetlight-repair.jpg" alt="Streetlight repair work"><figcaption>Streetlight not working</figcaption></figure>
+      <figure class="ph"><img src="assets/water-line-leakage.jpg" alt="Water line leakage repair"><figcaption>Water pipe leakage</figcaption></figure>
+      <figure class="ph"><img src="assets/traffic-light-repair.jpg" alt="Traffic signal repair"><figcaption>Traffic signal problems</figcaption></figure>
+      <figure class="ph"><img src="assets/eb-power-issue.jpg" alt="Electricity maintenance work"><figcaption>Electricity and loose-wire issues</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="sec clean">
+    <h2 class="title">Keep our city clean and neat</h2>
+    <div class="quote" id="quote">Clean street, happy feet. Together we make our city neat!</div>
+    <div class="steps">
+      <div><b>1</b><h3>Register</h3><p>Create your account once.</p></div>
+      <div><b>2</b><h3>Report</h3><p>Pick your city, area and problem.</p></div>
+      <div><b>3</b><h3>Track</h3><p>Follow the status with your Complaint ID.</p></div>
+    </div>
+  </section>
+</main>
+
+<main id="complaintView" class="view">
+  <section class="sec comp">
+    <div class="info">
+      <h2>Zero Problem City</h2>
+      <p>See something wrong in your area? Tell your Corporation. It takes two minutes.</p>
+      <ul>
+        <li>Choose your city and area</li><li>Pick the problem type</li>
+        <li>Add a photo, video or letter</li><li>Get a Complaint ID to track</li>
+      </ul>
+    </div>
+    <form class="card form" id="cForm" onsubmit="submitComplaint(event)">
+      <h3>Register Complaint</h3>
+      <div class="row">
+        <div><label for="cName">Your name</label><input id="cName" required></div>
+        <div><label for="cPhone">Mobile (10 digits)</label><input id="cPhone" inputmode="numeric" maxlength="10" required></div>
+      </div>
+      <div class="row">
+        <div><label for="cCity">City / Corporation</label><select id="cCity" required></select></div>
+        <div><label for="cType">Problem</label><select id="cType" required></select></div>
+      </div>
+      <div class="row">
+        <div><label for="cArea">Area, street, landmark</label><input id="cArea" required></div>
+        <div><label for="cPriority">Priority</label><select id="cPriority"><option>Low</option><option selected>Medium</option><option>High</option><option>Emergency</option></select></div>
+      </div>
+      <button type="button" class="btn small" onclick="getLocation()">Use my location</button>
+      <label for="cLetter">Complaint letter</label>
+      <textarea id="cLetter" placeholder="Describe the problem and how long it has been there" required></textarea>
+      <div class="row">
+        <div><label for="photo">Photo</label><input type="file" id="photo" accept="image/*" onchange="preview('photo','photoPreview')"><img id="photoPreview" alt="Photo preview"></div>
+        <div><label for="video">Video (below 25 MB)</label><input type="file" id="video" accept="video/*" onchange="preview('video','videoPreview')"><video id="videoPreview" controls></video></div>
+      </div>
+      <button class="btn" type="submit">Submit Complaint</button>
+      <div class="done" id="done" role="status" hidden></div>
+    </form>
+  </section>
+</main>
+
+<main id="trackView" class="view">
+  <section class="sec">
+    <h2 class="title">Track your complaint</h2>
+    <div class="card trackbox">
+      <label for="trackId">Complaint ID</label>
+      <div class="inline"><input id="trackId" placeholder="TN-2026-1234"><button class="btn" onclick="trackComplaint()">Track</button></div>
+      <div id="result"></div>
+    </div>
+    <h3 class="mine">Your complaints</h3><div class="list" id="list"></div>
+  </section>
+</main>
+
+<footer>
+  <blockquote class="kural">
+    <p lang="ta">தெய்வத்தான் ஆகாதெனினும் முயற்சிதன்<br>மெய்வருத்தக் கூலி தரும்.</p>
+    <small>Thirukkural 619: Even if luck does not help, honest effort will pay its wages.</small>
+  </blockquote>
+  <div class="footer-message">
+    <h2 class="header-quote">Together for a Cleaner, Safer, and Better Tamil Nadu</h2>
+    <p class="header-subquote">Report Today. Resolve Tomorrow.</p>
+    <h2>தமிழ் வாழ்க! தமிழ்நாடு வாழ்க!</h2>
+    <p>Clean City. Green City. Proud City.</p>
+    <p>© 2026 Namma Tamil Nadu | Demo project, not an official government site</p>
+    <p><a class="staff-link" href="officer.html">Government staff login</a></p>
+  </div>
+</footer>
+
+<div id="toast" role="status"></div>
+<script src="db.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
